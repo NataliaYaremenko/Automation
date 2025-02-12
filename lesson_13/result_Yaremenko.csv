@@ -1,0 +1,35 @@
+import csv
+
+
+file1 = "csv/r-m-c.csv"
+file2 = "csv/rmc.csv"
+result_file = "csv/result_instructor.csv"
+
+with open(file1, mode='r', encoding='utf-8') as f1:
+    reader1 = csv.reader(f1) 
+    header1 = next(reader1)  
+    data1 = []  
+    for row in reader1:  
+        data1.append(tuple(row))  
+
+
+with open(file2, mode='r', encoding='utf-8') as f2:
+    reader2 = csv.reader(f2, delimiter=";") 
+    header2 = next(reader2)
+    data2 = []  
+    for row in reader2:  
+        data2.append(tuple(row))  
+
+
+if header1 != header2:  
+    raise ValueError("Заголовки файлів не співпадають!")  
+
+unique_data = list(set(data1).symmetric_difference(set(data2)))  
+
+with open(result_file, mode='w', encoding='utf-8', newline='') as result:
+    writer = csv.writer(result) 
+    writer.writerow(header1)  
+    writer.writerows(unique_data)  
+
+
+print(f"Дублікати видалено. Результат збережено у {result_file}.")
