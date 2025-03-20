@@ -1,0 +1,73 @@
+import unittest
+from unittest.mock import patch, Mock
+import requests
+
+# Функції для CRUD-запитів
+def get_data():
+    response = requests.get("https://www.test.com/data")
+    return response.json()
+
+def create_data(payload):
+    response = requests.post("https://www.test.com/data", json=payload)
+    return response.status_code
+
+def update_data(item_id, payload):
+    response = requests.put(f"https://www.test.com/data/{item_id}", json=payload)
+    return response.status_code
+
+def delete_data(item_id):
+    response = requests.delete(f"https://www.test.com/data/{item_id}")
+    return response.status_code
+
+# Тести з використанням Mock
+class TestCRUDRequests(unittest.TestCase):
+
+    @patch("requests.get")
+    def test_get_data(self, mock_get):
+        # Налаштовуємо мок для GET
+        mock_get.return_value = Mock(status_code=200, json=lambda: {"id": 1, "name": "Test"})
+        
+        # Викликаємо функцію
+        result = get_data()
+        
+        # Перевіряємо виклик
+        mock_get.assert_called_once_with("https://www.test.com/data")
+        self.assertEqual(result, {"id": 1, "name": "Test"})
+
+    @patch("requests.post")
+    def test_create_data(self, mock_post):
+        # Налаштовуємо мок для POST
+        mock_post.return_value = Mock(status_code=201)
+        
+        # Викликаємо функцію
+        payload = {"name": "New Item"}
+        status_code = create_data(payload)
+        
+        # Перевіряємо виклик
+        mock_post.assert_called_once_with("https://www.test.com/data", json=payload)
+        self.assertEqual(status_code, 201)
+
+    @patch("requests.put")
+    def test_update_data(self, mock_put):
+        # Налаштовуємо мок для PUT
+        mock_put.return_value = Mock(status_code=200)
+        
+        # Викликаємо функцію
+        payload = {"name": "Updated Item"}
+        status_code = update_data(1, payload)
+        
+        # Перевіряємо виклик
+        mock_put.assert_called_once_with("https://www.test.com/data/1", json=payload)
+        self.assertEqual(status_code, 200)
+
+    @patch("requests.delete")
+    def test_delete_data(self, mock_delete):
+        # Налаштовуємо мок для DELETE
+        mock_delete.return_value = Mock(status_code=204)
+        
+        # Викликаємо функцію
+        status_code = delete_data(1)
+        
+        # Перевіряємо виклик
+        mock_delete.assert_called_once_with("https://www.test.com/data/1")
+        self.assertEqual(status_code, 204)

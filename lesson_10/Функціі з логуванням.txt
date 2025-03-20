@@ -1,0 +1,38 @@
+def calculate_sums(strings):
+    results = []
+    for string in strings:
+        try:
+            numbers = list(map(int, string.split(',')))
+            total = sum(numbers)
+            results.append(total)
+        except ValueError:
+            results.append("Не можу це зробити!")
+    return results
+
+def multiplication_table(number):
+    multiplier = 1
+    while True:
+        result = number * multiplier
+        if result > 25:
+            break
+        print(f"{number}x{multiplier}={result}")
+        multiplier += 1
+
+def sum_numbers(a, b):
+    return a + b
+
+def arithmetic_mean(numbers):
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)
+
+def reverse_string(s):
+    return s[::-1]
+
+def longest_word(words):
+    if not words:
+        return ""
+    return max(words, key=len)
+
+def find_substring(str1, str2):
+    return str1.find(str2)
