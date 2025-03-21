@@ -1,1 +1,0 @@
-Keep TailwindSettings.BUNDLED_TAILWIND_LSP_VERSION up-to-date.
