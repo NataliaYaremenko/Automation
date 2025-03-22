@@ -1,0 +1,69 @@
+Основні методи:
+msg Аргумент який по дефолту порожній. Але буде виведений у випадку неспівпадіння. 
+
+assertEqual(first, second, msg=None)
+Перевіряє, що first == second.
+
+assertNotEqual(first, second, msg=None)
+Перевіряє, що first != second.
+
+assertTrue(expr, msg=None)
+Перевіряє, що expr істинне.
+
+assertFalse(expr, msg=None)
+Перевіряє, що expr хибне.
+
+assertIs(first, second, msg=None)
+Перевіряє, що first і second є одним і тим самим об'єктом.
+
+assertIsNot(first, second, msg=None)
+Перевіряє, що first і second не є одним і тим самим об'єктом.
+
+assertIsNone(expr, msg=None)
+Перевіряє, що expr дорівнює None.
+
+assertIsNotNone(expr, msg=None)
+Перевіряє, що expr не дорівнює None.
+
+Методи для роботи зі списками та контейнерами:
+
+assertIn(member, container, msg=None)
+Перевіряє, що member є у container.
+
+assertNotIn(member, container, msg=None)
+Перевіряє, що member не є у container.
+
+assertCountEqual(first, second, msg=None)
+Перевіряє, що first і second містять однакові елементи (незалежно від порядку).
+
+Методи для перевірки типів:
+
+assertIsInstance(obj, cls, msg=None)
+Перевіряє, що obj є екземпляром класу cls.
+
+assertNotIsInstance(obj, cls, msg=None)
+Перевіряє, що obj не є екземпляром класу cls.
+
+Методи для роботи з винятками:
+
+assertRaises(expected_exception, callable, *args, **kwargs)
+Перевіряє, що виклик callable(*args, **kwargs) викликає виняток expected_exception.
+
+assertRaisesRegex(expected_exception, regex, callable, *args, **kwargs)
+Перевіряє, що викликаний виняток відповідає регулярному виразу regex.
+
+Методи для перевірки тексту:
+
+assertRegex(text, regex, msg=None)
+Перевіряє, що рядок text відповідає регулярному виразу regex.
+
+assertNotRegex(text, regex, msg=None)
+Перевіряє, що рядок text не відповідає регулярному виразу regex.
+
+Методи для порівняння чисел:
+
+assertAlmostEqual(first, second, places=None, msg=None, delta=None)
+Перевіряє, що first і second майже рівні (з точністю до places десяткових знаків або delta).
+
+assertNotAlmostEqual(first, second, places=None, msg=None, delta=None)
+Перевіряє, що first і second не майже рівні.
